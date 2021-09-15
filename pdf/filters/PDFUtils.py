@@ -22,7 +22,7 @@
 #
 
 '''
-    Module with some misc functions
+	Module with some misc functions
 '''
 
 import os,re
@@ -39,40 +39,40 @@ def clearScreen():
 		os.system('clear')
 
 def countArrayElements(array):
-    '''
-        Simple method to count the repetitions of elements in an array
-        
+	'''
+		Simple method to count the repetitions of elements in an array
+		
 		@param array: An array of elements
 		@return: A tuple (elements,counters), where elements is a list with the distinct elements and counters is the list with the number of times they appear in the array
 	'''
-    elements = []
-    counters = []
-    for element in array:
-        if element in elements:
-            indx = elements.index(element)
-            counters[indx] += 1
-        else:
-            elements.append(element)
-            counters.append(1)
-    return elements,counters
+	elements = []
+	counters = []
+	for element in array:
+		if element in elements:
+			indx = elements.index(element)
+			counters[indx] += 1
+		else:
+			elements.append(element)
+			counters.append(1)
+	return elements,counters
 
 def countNonPrintableChars(string):
-    '''
-        Simple method to return the non printable characters found in an string
-        
+	'''
+		Simple method to return the non printable characters found in an string
+		
 		@param string: A string
 		@return: Number of non printable characters in the string
 	'''
-    counter = 0
-    for i in range(len(string)):
-        if ord(string[i]) <= 31 or ord(string[i]) > 127:
-            counter += 1
-    return counter
+	counter = 0
+	for i in range(len(string)):
+		if ord(string[i]) <= 31 or ord(string[i]) > 127:
+			counter += 1
+	return counter
 
 def decodeName(name):
 	'''
-        Decode the given PDF name
-        
+		Decode the given PDF name
+		
 		@param name: A PDFName string to decode
 		@return: A tuple (status,statusContent), where statusContent is the decoded PDF name in case status = 0 or an error in case status = -1
 	'''
@@ -87,8 +87,8 @@ def decodeName(name):
 
 def decodeString(string):
 	'''
-        Decode the given PDF string
-        
+		Decode the given PDF string
+		
 		@param string: A PDFString to decode
 		@return A tuple (status,statusContent), where statusContent is the decoded PDF string in case status = 0 or an error in case status = -1
 	'''
@@ -103,8 +103,8 @@ def decodeString(string):
 
 def encodeName(name):
 	'''
-        Encode the given PDF name
-        
+		Encode the given PDF name
+		
 		@param name: A PDFName string to encode
 		@return: A tuple (status,statusContent), where statusContent is the encoded PDF name in case status = 0 or an error in case status = -1
 	'''
@@ -124,8 +124,8 @@ def encodeName(name):
 
 def encodeString(string):
 	'''
-        Encode the given PDF string
-        
+		Encode the given PDF string
+		
 		@param string: A PDFString to encode
 		@return: A tuple (status,statusContent), where statusContent is the encoded PDF string in case status = 0 or an error in case status = -1
 	'''
@@ -139,25 +139,25 @@ def encodeString(string):
 	return (0,encodedString)
 
 def escapeRegExpString(string):
-    '''
-        Escape the given string to include it as a regular expression
-        
-        @param string: A regular expression to be escaped
-        @return: Escaped string
-    '''
-    toEscapeChars = ['\\','(',')','.','|','^','$','*','+','?','[',']']
-    escapedValue = ''
-    for i in range(len(string)):
-        if string[i] in toEscapeChars:
-            escapedValue += '\\'+string[i]
-        else:
-            escapedValue += string[i]
-    return escapedValue
-    
+	'''
+		Escape the given string to include it as a regular expression
+		
+		@param string: A regular expression to be escaped
+		@return: Escaped string
+	'''
+	toEscapeChars = ['\\','(',')','.','|','^','$','*','+','?','[',']']
+	escapedValue = ''
+	for i in range(len(string)):
+		if string[i] in toEscapeChars:
+			escapedValue += '\\'+string[i]
+		else:
+			escapedValue += string[i]
+	return escapedValue
+		
 def escapeString(string):
 	'''
-        Escape the given string
-        
+		Escape the given string
+		
 		@param string: A string to be escaped
 		@return: Escaped string
 	'''
@@ -187,107 +187,107 @@ def escapeString(string):
 	return escapedValue
 
 def getBitsFromNum(num, bitsPerComponent = 8):
-    '''
-        Makes the conversion between number and bits
-        
-        @param num: Number to be converted
-        @param bitsPerComponent: Number of bits needed to represent a component
-        @return: A tuple (status,statusContent), where statusContent is the string containing the resulting bits in case status = 0 or an error in case status = -1
-    '''
-    if not isinstance(num,int):
-        return (-1,'num must be an integer')
-    if not isinstance(bitsPerComponent,int):
-        return (-1,'bitsPerComponent must be an integer')
-    try:
-        bitsRepresentation = bin(num)
-        bitsRepresentation = bitsRepresentation.replace('0b','')
-        mod = len(bitsRepresentation) % 8
-        if mod != 0:
-            bitsRepresentation = '0'*(8-mod) + bitsRepresentation
-        bitsRepresentation = bitsRepresentation[-1*bitsPerComponent:]
-    except:
-        return (-1,'Error in conversion from number to bits')
-    return (0,bitsRepresentation)
+	'''
+		Makes the conversion between number and bits
+		
+		@param num: Number to be converted
+		@param bitsPerComponent: Number of bits needed to represent a component
+		@return: A tuple (status,statusContent), where statusContent is the string containing the resulting bits in case status = 0 or an error in case status = -1
+	'''
+	if not isinstance(num,int):
+		return (-1,'num must be an integer')
+	if not isinstance(bitsPerComponent,int):
+		return (-1,'bitsPerComponent must be an integer')
+	try:
+		bitsRepresentation = bin(num)
+		bitsRepresentation = bitsRepresentation.replace('0b','')
+		mod = len(bitsRepresentation) % 8
+		if mod != 0:
+			bitsRepresentation = '0'*(8-mod) + bitsRepresentation
+		bitsRepresentation = bitsRepresentation[-1*bitsPerComponent:]
+	except:
+		return (-1,'Error in conversion from number to bits')
+	return (0,bitsRepresentation)
 
 
 def getNumsFromBytes(bytes, bitsPerComponent = 8):
-    '''
-        Makes the conversion between bytes and numbers, depending on the number of bits used per component.
-        
-        @param bytes: String representing the bytes to be converted
-        @param bitsPerComponent: Number of bits needed to represent a component
-        @return: A tuple (status,statusContent), where statusContent is a list of numbers in case status = 0 or an error in case status = -1
-    '''
-    if not isinstance(bytes,str):
-        return (-1,'bytes must be a string')
-    if not isinstance(bitsPerComponent,int):
-        return (-1,'bitsPerComponent must be an integer')
-    outputComponents = []
-    bitsStream = ''
-    for byte in bytes:
-        try:
-            bitsRepresentation = bin(ord(byte))
-            bitsRepresentation = bitsRepresentation.replace('0b','')
-            bitsRepresentation = '0'*(8-len(bitsRepresentation)) + bitsRepresentation
-            bitsStream += bitsRepresentation
-        except:
-            return (-1,'Error in conversion from bytes to bits')
-    
-    try:
-        for i in range(0,len(bitsStream),bitsPerComponent):
-            bytes = ''
-            bits = bitsStream[i:i+bitsPerComponent]
-            num = int(bits,2)
-            outputComponents.append(num)
-    except:
-        return (-1,'Error in conversion from bits to bytes')
-    return (0,outputComponents)       
+	'''
+		Makes the conversion between bytes and numbers, depending on the number of bits used per component.
+		
+		@param bytes: String representing the bytes to be converted
+		@param bitsPerComponent: Number of bits needed to represent a component
+		@return: A tuple (status,statusContent), where statusContent is a list of numbers in case status = 0 or an error in case status = -1
+	'''
+	if not isinstance(bytes,str):
+		return (-1,'bytes must be a string')
+	if not isinstance(bitsPerComponent,int):
+		return (-1,'bitsPerComponent must be an integer')
+	outputComponents = []
+	bitsStream = ''
+	for byte in bytes:
+		try:
+			bitsRepresentation = bin(ord(byte))
+			bitsRepresentation = bitsRepresentation.replace('0b','')
+			bitsRepresentation = '0'*(8-len(bitsRepresentation)) + bitsRepresentation
+			bitsStream += bitsRepresentation
+		except:
+			return (-1,'Error in conversion from bytes to bits')
+		
+	try:
+		for i in range(0,len(bitsStream),bitsPerComponent):
+			bytes = ''
+			bits = bitsStream[i:i+bitsPerComponent]
+			num = int(bits,2)
+			outputComponents.append(num)
+	except:
+		return (-1,'Error in conversion from bits to bytes')
+	return (0,outputComponents)	   
 
 def getBytesFromBits(bitsStream):
-    '''
-        Makes the conversion between bits and bytes.
-        
-        @param bitsStream: String representing a chain of bits
-        @return: A tuple (status,statusContent), where statusContent is the string containing the resulting bytes in case status = 0 or an error in case status = -1
-    '''
-    if not isinstance(bitsStream,str):
-        return (-1,'The bitsStream must be a string')
-    bytes = ''
-    if re.match('[01]*$',bitsStream):
-        try:
-            for i in range(0,len(bitsStream),8):
-                bits = bitsStream[i:i+8]
-                byte = chr(int(bits,2))
-                bytes += byte
-        except:
-            return (-1,'Error in conversion from bits to bytes')
-        return (0,bytes)
-    else:
-        return (-1,'The format of the bit stream is not correct') 
+	'''
+		Makes the conversion between bits and bytes.
+		
+		@param bitsStream: String representing a chain of bits
+		@return: A tuple (status,statusContent), where statusContent is the string containing the resulting bytes in case status = 0 or an error in case status = -1
+	'''
+	if not isinstance(bitsStream,str):
+		return (-1,'The bitsStream must be a string')
+	bytes = ''
+	if re.match('[01]*$',bitsStream):
+		try:
+			for i in range(0,len(bitsStream),8):
+				bits = bitsStream[i:i+8]
+				byte = chr(int(bits,2))
+				bytes += byte
+		except:
+			return (-1,'Error in conversion from bits to bytes')
+		return (0,bytes)
+	else:
+		return (-1,'The format of the bit stream is not correct') 
 
 def getBytesFromFile(filename, offset, numBytes):
-    '''
-        Returns the number of bytes specified from a file, starting from the offset specified
-        
+	'''
+		Returns the number of bytes specified from a file, starting from the offset specified
+		
 		@param filename: Name of the file
 		@param offset: Bytes offset
 		@param numBytes: Number of bytes to retrieve
 		@return: A tuple (status,statusContent), where statusContent is the bytes read in case status = 0 or an error in case status = -1
 	'''
-    if not isinstance(offset,int) or not isinstance(numBytes,int):
-        return (-1,'The offset and the number of bytes must be integers')
-    if os.path.exists(filename):
-        fileSize = os.path.getsize(filename)
-        bytesFile = open(filename,'r')
-        bytesFile.seek(offset)
-        if offset+numBytes > fileSize:
-            bytes = bytesFile.read()
-        else:
-            bytes = bytesFile.read(numBytes)
-        bytesFile.close()
-        return (0,bytes)
-    else:
-        return (-1,'File does not exist')
+	if not isinstance(offset,int) or not isinstance(numBytes,int):
+		return (-1,'The offset and the number of bytes must be integers')
+	if os.path.exists(filename):
+		fileSize = os.path.getsize(filename)
+		bytesFile = open(filename,'r')
+		bytesFile.seek(offset)
+		if offset+numBytes > fileSize:
+			bytes = bytesFile.read()
+		else:
+			bytes = bytesFile.read(numBytes)
+		bytesFile.close()
+		return (0,bytes)
+	else:
+		return (-1,'File does not exist')
 
 def hexToString(hexString):
 	'''
@@ -307,30 +307,30 @@ def hexToString(hexString):
 	return (0,string)
 
 def numToHex(num, numBytes):
-    '''
-        Given a number returns its hexadecimal format with the specified length, adding '\0' if necessary
+	'''
+		Given a number returns its hexadecimal format with the specified length, adding '\0' if necessary
 		
 		@param num: A number (int)
 		@param numBytes: Length of the output (int)
 		@return: A tuple (status,statusContent), where statusContent is a number in hexadecimal format in case status = 0 or an error in case status = -1
 	'''
-    hexString = ''
-    if not isinstance(num,int):
-    	return (-1,'Bad number')
-    try:
-	    hexNumber = hex(num)[2:]
-	    if len(hexNumber) % 2 != 0:
-	        hexNumber = '0'+hexNumber
-	    for i in range(0,len(hexNumber)-1,2):
-	        hexString += chr(int(hexNumber[i]+hexNumber[i+1],16))
-	    hexString = '\0'*(numBytes-len(hexString))+hexString
-    except:
+	hexString = ''
+	if not isinstance(num,int):
+		return (-1,'Bad number')
+	try:
+		hexNumber = hex(num)[2:]
+		if len(hexNumber) % 2 != 0:
+			hexNumber = '0'+hexNumber
+		for i in range(0,len(hexNumber)-1,2):
+			hexString += chr(int(hexNumber[i]+hexNumber[i+1],16))
+		hexString = '\0'*(numBytes-len(hexString))+hexString
+	except:
 		return (-1,'Error in hexadecimal conversion')
-    return (0,hexString)
-                  		
+	return (0,hexString)
+				  		
 def numToString(num, numDigits):
 	'''
-        Given a number returns its string format with the specified length, adding '0' if necessary
+		Given a number returns its string format with the specified length, adding '0' if necessary
 		
 		@param num: A number (int)
 		@param numDigits: Length of the output string (int)
@@ -344,11 +344,11 @@ def numToString(num, numDigits):
 	for i in range(numDigits-len(strNum)):
 		strNum = '0' + strNum
 	return (0,strNum)
-     
+	 
 def unescapeString(string):
 	'''
-        Unescape the given string
-        
+		Unescape the given string
+		
 		@param string: An escaped string
 		@return: Unescaped string
 	'''
