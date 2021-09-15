@@ -152,34 +152,34 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 '''
 def ascii85Decode(stream):
-    '''
-        Method to decode streams using ASCII85
-    
-        @param stream: A PDF stream
-        @return: A tuple (status,statusContent), where statusContent is the decoded PDF stream in case status = 0 or an error in case status = -1
-    '''
-    n = b = 0 
-    decodedStream = ''
-    try:
-	    for c in stream:
-	        if '!' <= c and c <= 'u':
-	            n += 1
-	            b = b*85+(ord(c)-33)
-	            if n == 5:
-	                decodedStream += struct.pack('>L',b)
-	                n = b = 0
-	        elif c == 'z':
-	            assert n == 0
-	            decodedStream += '\0\0\0\0'
-	        elif c == '~':
-	            if n:
-	                for _ in range(5-n):
-	                    b = b*85+84
-	                decodedStream += struct.pack('>L',b)[:n-1]
-	            break
-    except:
+	'''
+		Method to decode streams using ASCII85
+		
+		@param stream: A PDF stream
+		@return: A tuple (status,statusContent), where statusContent is the decoded PDF stream in case status = 0 or an error in case status = -1
+	'''
+	n = b = 0 
+	decodedStream = ''
+	try:
+		for c in stream:
+			if '!' <= c and c <= 'u':
+				n += 1
+				b = b*85+(ord(c)-33)
+				if n == 5:
+					decodedStream += struct.pack('>L',b)
+					n = b = 0
+			elif c == 'z':
+				assert n == 0
+				decodedStream += '\0\0\0\0'
+			elif c == '~':
+				if n:
+					for _ in range(5-n):
+						b = b*85+84
+					decodedStream += struct.pack('>L',b)[:n-1]
+				break
+	except:
 		return (-1,'Unspecified error')
-    return (0,decodedStream)
+	return (0,decodedStream)
 
 def ascii85Encode(stream):
 	'''
@@ -193,11 +193,11 @@ def ascii85Encode(stream):
 
 def asciiHexDecode(stream):
 	'''
-        Method to decode streams using hexadecimal encoding
-    
-        @param stream: A PDF stream
-        @return: A tuple (status,statusContent), where statusContent is the decoded PDF stream in case status = 0 or an error in case status = -1
-    '''
+		Method to decode streams using hexadecimal encoding
+		
+		@param stream: A PDF stream
+		@return: A tuple (status,statusContent), where statusContent is the decoded PDF stream in case status = 0 or an error in case status = -1
+	'''
 	eod = '>'
 	decodedStream = ''
 	char = ''
